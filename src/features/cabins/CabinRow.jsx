@@ -43,6 +43,7 @@ const Discount = styled.div`
 import React from 'react'
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCabin } from "../../services/apiCabins";
+import toast from "react-hot-toast";
 
 const CabinRow = ({cabin}) => {
   const {id: cabinId ,name,regularPrice,maxCapacity,discount,image} = cabin
@@ -51,6 +52,7 @@ const CabinRow = ({cabin}) => {
   const {isLoading,mutate} =useMutation({
      mutationFn : deleteCabin,
      onSuccess: () => {
+      toast.success("Cabin deleted succesfully")
        queryClient.invalidateQueries({
         queryKey:['cabins']
        })
